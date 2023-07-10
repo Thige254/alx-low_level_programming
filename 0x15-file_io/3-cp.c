@@ -5,11 +5,11 @@
  * @filename:  pointer to filename
  * @text_content: string to add to the end of the file.
  *
- * Return: 1 on success and -1 on failure
+ * Return: 1 on success. 0 on failure
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int o, width, length = 0;
+	int text, width, length = 0;
 
 	if (filename == NULL)
 		return (-1);
@@ -20,13 +20,13 @@ int append_text_to_file(const char *filename, char *text_content)
 			length++;
 	}
 
-	o = open(filename, O_WRONLY | O_APPEND);
+	text = open(filename, O_WRONLY | O_APPEND);
 	width = write(text, text_content, length);
 
-	if (o == -1 || width == -1)
+	if (text == -1 || width == -1)
 		return (-1);
 
-	close(o);
+	close(text);
 
 	return (1);
 }
