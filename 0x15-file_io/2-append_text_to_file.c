@@ -1,8 +1,15 @@
 #include "main.h"
 
+/**
+ * append_text_to_file - Appends text at the end of a file.
+ * @filename:  pointer to filename
+ * @text_content: string to add to the end of the file.
+ *
+ * Return: 1 on success. 0 on failure
+ */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int copy, width, length = 0;
+	int text, width, length = 0;
 
 	if (filename == NULL)
 		return (-1);
@@ -13,13 +20,13 @@ int append_text_to_file(const char *filename, char *text_content)
 			length++;
 	}
 
-	copy = open(filename, O_WRONLY | O_APPEND);
-	width = write(copy, text_content, length);
+	text = open(filename, O_WRONLY | O_APPEND);
+	width = write(text, text_content, length);
 
-	if (copy == -1 || width == -1)
+	if (text == -1 || width == -1)
 		return (-1);
 
-	close(copy);
+	close(text);
 
 	return (1);
 }
