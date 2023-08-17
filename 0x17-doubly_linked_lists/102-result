@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+/**
+ * is_palindrome - checks if an integer is palindromic
+ * @n: the integer to check
+ *
+ * Return: 1 if the number is a palindrome, 0 otherwise
+ */
+int is_palindrome(int n)
+{
+	int computed_reverse = 0;
+	int initial_value = n;
+
+	while (n > 0)
+	{
+		computed_reverse = computed_reverse * 10 + n % 10;
+		n /= 10;
+	}
+
+	return initial_value == computed_reverse;
+}
+
+/**
+ * main - looks for largest palindrome from two 3-digit numbers
+ *
+ * Return: 0 (success)
+ */
+int main(void)
+{
+	int num1, num2, current_product;
+	int largest_palindrome = 0;
+
+	for (num1 = 999; num1 >= 100; num1--)
+	{
+		if (num1 * 999 < largest_palindrome)
+			break;
+
+		for (num2 = 999; num2 >= num1; num2--)
+		{
+			if (num1 * num2 < largest_palindrome)
+				break;
+
+			current_product = num1 * num2;
+
+			if (is_palindrome(current_product))
+			{
+				largest_palindrome = current_product;
+				break;
+			}
+		}
+	}
+
+	printf("%d", largest_palindrome);
+	return (0);
+}
