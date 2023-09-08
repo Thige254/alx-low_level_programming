@@ -17,7 +17,7 @@ const char *value)
 	if (!ht || !key || !*key || !value)
 		return (0);
 
-	/* Use key_index function to calculate the index for the key */
+	/* Use key_index function to calculatethe index for key */
 	index = key_index((const unsigned char *)key, ht->size);
 
 	current = ht->array[index];
