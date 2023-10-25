@@ -1,39 +1,36 @@
 # Compiler to be used
 CC = gcc
 
-# Source files
+# List of source files
 SRC = main.c school.c
 
-# Generate object files from source files
+# Convert source files to object files
 OBJ = $(SRC:.c=.o)
 
 # Name of the final executable
 NAME = school
 
-# Compiler flags
+# Compiler flags to be used
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
-# Specifying unkown targets to ensure they run regardless of whether there's a file
+# Declaring phony targets to ensure they're always executed
 .PHONY: all clean oclean fclean re
 
-# Main target: builds the executable only if m.h is present and recompiles only the updated source files
+# The primary target 'all': builds the executable. 
+# It depends on m.h and the object files.
 all: m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
-# Deletes all Emacs and Vim temporary files along with the executable
+# The 'clean' target: deletes all Emacs and Vim temporary files along with the executable
 clean:
 	$(RM) *~ $(NAME)
 
-# Deletes the object files
+# The 'oclean' target: deletes the object files
 oclean:
 	$(RM) $(OBJ)
 
-# Deletes all Emacs and Vim temporary files, the executable, and the object files
+# The 'fclean' target: performs 'clean' and then 'oclean'
 fclean: clean oclean
 
-# Forces recompilation of all source files
+# The 're' target: forces a recompilation of all source files
 re: fclean all
-
-# Implicit rule to convert .c to .o, adding a dependency on m.h
-%.o: %.c m.h
-	$(CC) $(CFLAGS) -c $< -o $@
