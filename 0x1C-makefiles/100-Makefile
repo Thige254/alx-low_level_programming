@@ -1,25 +1,39 @@
-CC := gcc
-SRC := $(wildcard *.c)
-OBJ := $(patsubst %.c,%.o,$(SRC))
-NAME := school
-CFLAGS := -Wall -Werror -Wextra -pedantic
+# Compiler to be used
+CC = gcc
 
-all: $(NAME)
+# Source files
+SRC = main.c school.c
 
-$(NAME): $(OBJ)
-	$(CC) -o $@ $^
+# Generate object files from source files
+OBJ = $(SRC:.c=.o)
 
-%.o: %.c m.h
-	$(CC) $(CFLAGS) -c $< -o $@
+# Name of the final executable
+NAME = school
 
+# Compiler flags
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+# Specifying unkown targets to ensure they run regardless of whether there's a file
+.PHONY: all clean oclean fclean re
+
+# Main target: builds the executable only if m.h is present and recompiles only the updated source files
+all: m.h $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+# Deletes all Emacs and Vim temporary files along with the executable
 clean:
-	@rm -f *~ $(NAME)
+	$(RM) *~ $(NAME)
 
+# Deletes the object files
 oclean:
-	@rm -f $(OBJ)
+	$(RM) $(OBJ)
 
-fclean: oclean clean
+# Deletes all Emacs and Vim temporary files, the executable, and the object files
+fclean: clean oclean
 
+# Forces recompilation of all source files
 re: fclean all
 
-.PHONY: all clean fclean oclean re
+# Implicit rule to convert .c to .o, adding a dependency on m.h
+%.o: %.c m.h
+	$(CC) $(CFLAGS) -c $< -o $@
