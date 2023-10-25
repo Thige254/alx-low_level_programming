@@ -1,16 +1,17 @@
-TARGET = school
+# Executable's name
+OUTPUT = school
 
-SOURCES = $(wildcard *.c)
-
-# Compiler that will be used
+# The compiler that will be used
 CC = gcc
 
-all: $(TARGET)
+# Source files that will be compiled(as the repository says)
+SOURCES = main.c school.c
 
-$(TARGET): $(SOURCES)
-	$(CC) -o $(TARGET) $(SOURCES)
+# Rule: all
+all:
+	$(CC) $(SOURCES) -o $(OUTPUT)
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OUTPUT)
 
 .PHONY: all clean
