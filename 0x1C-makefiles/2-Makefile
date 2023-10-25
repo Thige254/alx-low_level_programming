@@ -1,17 +1,16 @@
+# Compiler to be used
 CC = gcc
-SRC = $(wildcard *.c)
+
+# List of source files
+SRC = main.c school.c
+
+# Convert source files to object files
 OBJ = $(SRC:.c=.o)
+
+# Name of the final executable
 NAME = school
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $^ -o $@
-
-%.o: %.c
-	$(CC) -c $< -o $@
-
-clean:
-	rm -f $(OBJ) $(NAME)
-
-.PHONY: all clean
+# The primary target 'all': builds the executable.
+# It depends on the object files.
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
