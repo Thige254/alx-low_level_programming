@@ -1,25 +1,39 @@
+# Variables
+
+# Compiler to use
 CC = gcc
-SRC = $(wildcard *.c)
+
+# Source files to compile
+SRC = main.c school.c
+
+# Object files generated from the source files
 OBJ = $(SRC:.c=.o)
+
+# Name of the final executable
 NAME = school
+
+# Command to remove files
 RM = rm -f
 
-all: $(NAME)
+# Rules
 
-$(NAME): $(OBJ)
-	$(CC) $^ -o $@
+# The main rule - generates the executable
+all: $(OBJ)
+	# Linking the object files to produce the final executable
+	$(CC) $(OBJ) -o $(NAME)
 
-%.o: %.c
-	$(CC) -c $< -o $@
-
+# Rule to clean temporary files and the executable
 clean:
+	# Removing Emacs and Vim temporary files and the executable
 	$(RM) *~ $(NAME)
 
+# Rule to clean the object files
 oclean:
+	# Removing object files
 	$(RM) $(OBJ)
 
+# Rule to completely clean the directory (both temporary files and the executable)
 fclean: clean oclean
 
+# Rule to force recompilation of all source files
 re: fclean all
-
-.PHONY: all clean oclean fclean re
