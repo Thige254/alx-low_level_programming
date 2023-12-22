@@ -24,7 +24,7 @@ typedef struct listint_s
  * @next: Pointer to the next node
  * @express: Pointer to the next node in the express lane
  *
- * Description: Node structure for a singly linked list with an express lane
+ * Description: Node structure for a singly linked list
  */
 typedef struct skiplist_s
 {
@@ -35,12 +35,15 @@ typedef struct skiplist_s
 
 /* Function prototypes */
 int linear_search(int *array, size_t size, int value);
-int binary_search(int *array, size_t size, int value);
+int binary_search(int *array, size_t start, size_t end, int value);
 int jump_search(int *array, size_t size, int value);
 int interpolation_search(int *array, size_t size, int value);
 int exponential_search(int *array, size_t size, int value);
 int advanced_binary(int *array, size_t size, int value);
 listint_t *jump_list(listint_t *list, size_t size, int value);
 skiplist_t *linear_skip(skiplist_t *list, int value);
+
+/* Helper function */
+void print_range(int *array, size_t start, size_t end);
 
 #endif /* SEARCH_ALGOS_H */
